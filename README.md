@@ -93,3 +93,23 @@ cmd /c "scripts\build_exe.bat"
 ## 依赖
 
 见 **`requirements.txt`**（`opencv-python`、`numpy`、`Pillow`、`onnxruntime`、`pyinstaller` 等）。
+
+## 上传到 GitHub
+
+1. 在 [GitHub](https://github.com/new) 新建**空仓库**（不要勾选 “Add a README” 等初始化文件，避免与本地首次提交冲突）。
+2. 在**项目根目录**执行（将 `YOUR_USER` / `YOUR_REPO` 换成你的用户名与仓库名；若默认分支不是 `main`，请改成实际分支名）：
+
+```powershell
+cd C:\Users\yanchen\PicAdj
+git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+git push -u origin main
+```
+
+首次 `push` 时浏览器或 Git Credential Manager 会提示登录 GitHub。若尚未配置提交者信息，请先执行：
+
+```powershell
+git config --global user.name "你的名字"
+git config --global user.email "你的邮箱或与 GitHub 绑定的 noreply 邮箱"
+```
+
+本地仓库已包含 **`.gitignore`**（忽略 `build/`、`dist/`、虚拟环境与本地的 `models/*.onnx` 等；`models/.gitkeep` 仅用于保留空目录占位）。
