@@ -23,7 +23,7 @@ Windows 桌面小工具：从手机拍摄的文档照片中自动检测四角，
 
 ### 导出
 
-- **全部应用并保存…**：对列表中**每一张**用各自四角矫正，写入所选文件夹。若仍有图未完成自动检测，会先列出文件名并确认是否仍按当前角点导出。文件名默认为 **`IMG_YYYYMMDD_三位编号`**（如 `IMG_20260406_001.jpg`）；工具栏可选批量格式 **JPEG** 或 **PNG**。
+- **全部应用并保存…**：对列表中**每一张**用各自四角矫正，写入所选文件夹。若仍有图未完成自动检测，会先列出文件名并确认是否仍按当前角点导出。文件名默认为 `**IMG_YYYYMMDD_三位编号`**（如 `IMG_20260406_001.jpg`）；工具栏可选批量格式 **JPEG** 或 **PNG**。
 - **保存当前为…**：单张另存为；默认文件名规则与批量一致。
 
 ### 工具栏选项
@@ -40,15 +40,17 @@ Windows 桌面小工具：从手机拍摄的文档照片中自动检测四角，
 
 ## 目录结构
 
-| 路径 | 说明 |
-|------|------|
-| `run_picadj.py` | 入口（开发与 PyInstaller 共用） |
-| `src/app_main.py` | Tkinter UI、列表、预览与导出 |
-| `src/detect_document.py` | OpenCV 文档四边形检测 |
-| `src/rectify.py` | 透视矫正、CLAHE、落盘 |
-| `src/onnx_backend.py` | 可选 ONNX 与 OpenCV 融合 |
-| `picadj.spec` | PyInstaller 配置 |
-| `scripts/build_exe.bat` | 安装依赖并生成 exe |
+
+| 路径                       | 说明                     |
+| ------------------------ | ---------------------- |
+| `run_picadj.py`          | 入口（开发与 PyInstaller 共用） |
+| `src/app_main.py`        | Tkinter UI、列表、预览与导出    |
+| `src/detect_document.py` | OpenCV 文档四边形检测         |
+| `src/rectify.py`         | 透视矫正、CLAHE、落盘          |
+| `src/onnx_backend.py`    | 可选 ONNX 与 OpenCV 融合    |
+| `picadj.spec`            | PyInstaller 配置         |
+| `scripts/build_exe.bat`  | 安装依赖并生成 exe            |
+
 
 ## 环境要求
 
@@ -80,36 +82,17 @@ scripts\build_exe.bat
 cmd /c "scripts\build_exe.bat"
 ```
 
-生成 **`dist\PicAdj.exe`**（单文件、无控制台窗口）。
+生成 `**dist\PicAdj.exe**`（单文件、无控制台窗口）。
 
 - 首次打包需联网拉依赖。
 - 部分环境可能对 PyInstaller 产物误报，可按需加信任。
-- **ONNX 模型不会被打进 exe**：请将模型放到 **`PicAdj.exe` 同目录下的** `models\doc_segment.onnx`，或通过 **`PICADJ_ONNX_MODEL`** 指向文件。
+- **ONNX 模型不会被打进 exe**：请将模型放到 `**PicAdj.exe` 同目录下的** `models\doc_segment.onnx`，或通过 `**PICADJ_ONNX_MODEL`** 指向文件。
 
 ## 可选 ONNX 模型
 
-将符合 `src/onnx_backend.py` 约定的分割 ONNX 放到 `models\doc_segment.onnx`（与 exe 同级的 `models\` 文件夹），或设置环境变量 **`PICADJ_ONNX_MODEL`**。未放置时仅使用 OpenCV 检测。
+将符合 `src/onnx_backend.py` 约定的分割 ONNX 放到 `models\doc_segment.onnx`（与 exe 同级的 `models\` 文件夹），或设置环境变量 `**PICADJ_ONNX_MODEL**`。未放置时仅使用 OpenCV 检测。
 
 ## 依赖
 
-见 **`requirements.txt`**（`opencv-python`、`numpy`、`Pillow`、`onnxruntime`、`pyinstaller` 等）。
+见 `**requirements.txt**`（`opencv-python`、`numpy`、`Pillow`、`onnxruntime`、`pyinstaller` 等）。
 
-## 上传到 GitHub
-
-1. 在 [GitHub](https://github.com/new) 新建**空仓库**（不要勾选 “Add a README” 等初始化文件，避免与本地首次提交冲突）。
-2. 在**项目根目录**执行（将 `YOUR_USER` / `YOUR_REPO` 换成你的用户名与仓库名；若默认分支不是 `main`，请改成实际分支名）：
-
-```powershell
-cd C:\Users\yanchen\PicAdj
-git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
-git push -u origin main
-```
-
-首次 `push` 时浏览器或 Git Credential Manager 会提示登录 GitHub。若尚未配置提交者信息，请先执行：
-
-```powershell
-git config --global user.name "你的名字"
-git config --global user.email "你的邮箱或与 GitHub 绑定的 noreply 邮箱"
-```
-
-本地仓库已包含 **`.gitignore`**（忽略 `build/`、`dist/`、虚拟环境与本地的 `models/*.onnx` 等；`models/.gitkeep` 仅用于保留空目录占位）。
