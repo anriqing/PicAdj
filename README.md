@@ -90,9 +90,8 @@ cmd /c "scripts\build_exe.bat"
 
 ## 可选 ONNX 模型
 
-将符合 `src/onnx_backend.py` 约定的分割 ONNX 放到 `models\doc_segment.onnx`（与 exe 同级的 `models\` 文件夹），或设置环境变量 `**PICADJ_ONNX_MODEL**`。未放置时仅使用 OpenCV 检测。
+将符合 `src/onnx_backend.py` 约定的分割 ONNX 放到 `models\doc_segment.onnx`（与 exe 同级的 `models\` 文件夹），或设置环境变量 `**PICADJ_ONNX_MODEL`**。未放置时仅使用 OpenCV 检测。
 
 ## 依赖
 
-见 `**requirements.txt**`（`opencv-python`、`numpy`、`Pillow`、`onnxruntime`、`pyinstaller` 等）。
-
+见 `**requirements.txt`**（`opencv-python`、`numpy`、`Pillow`、`onnxruntime`、`pyinstaller` 等）。
